@@ -1,14 +1,17 @@
 {
-  "name": "sport-wc",
-  "version": "0.0.0",
-  "homepage": "https://github.com/zsagia/sport-wc",
-  "authors": [
-    "Zsolt Szabo <zsolt.szabo@liferay.com>"
-  ],
-  "description": "Sport Web Components",
-  "main": "sport-wc.js",
-  "keywords": [
-    "sport"
-  ],
-  "license": "MIT"
+	"name": "sport-wc",
+	"version": "0.0.0",
+	"homepage": "https://github.com/zsagia/sport-wc",
+	"authors": [
+		"Zsolt Szabo <zsolt.szabo@liferay.com>"
+	],
+	"description": "Sport Web Components",
+	"main": "sport-wc.js",
+	"keywords": [
+		"sport"
+	],
+	"license": "MIT",
+	"devDependencies": {
+		"jasmine": "~2.0.0"
+	}
 }
