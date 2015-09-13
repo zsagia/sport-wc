@@ -1,7 +1,7 @@
 describe("Club instance", function() {
 	var club;
 	var data = {
-		id: 2003,
+		id: 34567,
 		established: 1892,
 		logo: 'http://www.premierleague.com/content/dam/premierleague/shared-images/clubs/s/spurs/logo.png/_jcr_content/renditions/cq5dam.thumbnail.140.100.png',
 		manager: 'Mauricio Pochettino',
