@@ -1,4 +1,4 @@
-function Team(data) {
+function Club(data) {
 	this._id = data.id;
 	this._established = data.established;
 	this._logo = data.logo;
@@ -9,6 +9,6 @@ function Team(data) {
 	this._site = data.site;
 }
 
-Team.prototype.toString = function() {
+Club.prototype.toString = function() {
 	return this._name;
 };
