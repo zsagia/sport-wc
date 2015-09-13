@@ -11,5 +11,5 @@ function Person(data) {
 }
 
 Person.prototype.toString = function() {
-	return this._first_name + (this._nick_name : this._nick_name ? '') + this._second_name;
+	return this._first_name + (this._nick_name ? this._nick_name : '') + this._second_name;
 };
