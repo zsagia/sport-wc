@@ -12,6 +12,7 @@
 	],
 	"license": "MIT",
 	"devDependencies": {
+		"gulp": "~3.9.0",
 		"jasmine": "~2.3.0"
 	}
 }
