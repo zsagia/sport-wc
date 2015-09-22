@@ -9,7 +9,7 @@ function Match(data) {
 	this._scores = data.scores;
 	this._type = data.type;
 	this._venue = data.venue;
-};
+}
 
 Match.prototype.toString = function() {
 	var away_club = this._away_team._club;

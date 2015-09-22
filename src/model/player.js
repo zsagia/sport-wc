@@ -8,4 +8,4 @@ function Player(data) {
 
 Player.prototype = Object.create(Person.prototype);
 
-Player.prototype.constructor = Player 
+Player.prototype.constructor = Player;
