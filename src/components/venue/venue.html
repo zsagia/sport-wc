@@ -1,0 +1,56 @@
+<script src="../../model/venue.js"></script>
+
+<template id="venueTemplate">
+	<style>
+		.venue {
+			display: inline-block;
+			width: 400px;
+		}
+		.venue img {
+			width: inherit;
+		}
+	</style>
+	<div class="venue">
+		<image class="image">
+		<div>
+			<span class="name"></span>
+			<span class="city"></span>
+			<span class="country"></span>
+			<span class="built"></span>
+			<span class="capacity"></span>
+		</div>
+	</div>
+</template>
+
+<script type="text/javascript">
+	(function VenueView() {
+		var VenuePrototype = Object.create(HTMLElement.prototype);
+
+		var importDocument = document.currentScript.ownerDocument;
+
+		var venueTemplate = importDocument.querySelector('#venueTemplate').content;
+
+		VenuePrototype.createdCallback = function() {
+			var data = JSON.parse(this.getAttribute('data'));
+
+			var venue = new Venue(data);
+
+			var venueElement = venueTemplate.querySelector('.venue');
+
+			venueElement.querySelector('.built').textContent = venue._built;
+			venueElement.querySelector('.capacity').textContent = venue._capacity;
+			venueElement.querySelector('.city').textContent = venue._city;
+			venueElement.querySelector('.country').textContent = venue._country;
+			venueElement.querySelector('.image').src = venue._image;
+			venueElement.querySelector('.name').textContent = venue._name;
+
+			this.appendChild(document.importNode(venueTemplate, true));
+		}
+
+		document.registerElement(
+			'swc-venue', {
+				prototype: VenuePrototype
+			}
+		);
+	})();
+</script>
