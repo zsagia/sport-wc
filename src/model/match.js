@@ -1,12 +1,12 @@
 function Match(data) {
 	this._id = data.id;
 	this._attendance = data.attendance;
-	this._away_scores = data.away_scores;
+	this._away_goals = data.away_goals;
 	this._away_team = data.away_team;
 	this._date = data.date;
-	this._home_scores = data.home_scores;
+	this._home_goals = data.home_goals;
 	this._home_team = data.home_team;
-	this._scores = data.scores;
+	this._goals = data.goals;
 	this._type = data.type;
 	this._venue = data.venue;
 }

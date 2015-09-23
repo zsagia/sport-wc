@@ -1,5 +1,5 @@
-describe("Score instance", function() {
-	var score;
+describe("Goal instance", function() {
+	var goal;
 	
 	var player = {
 		id: 12345,
@@ -17,10 +17,10 @@ describe("Score instance", function() {
 	var match = {
 		id: 1002,
 		attendance: 40000,
-		away_scores: 1,
+		away_goals: 1,
 		away_team: 'Liverpool',
 		date: 1440757875,
-		home_scores: 1,
+		home_goals: 1,
 		home_team: 'Tottenham',
 		type: 'friendly',
 		venue: 'london'
@@ -34,27 +34,27 @@ describe("Score instance", function() {
 	};
 
 	beforeEach(function() {
-		score = new Score(data);
+		goal = new Goal(data);
 	});
 
 	it("date should be equal", function() {
-		expect(score._date).toEqual(1442312355);
+		expect(goal._date).toEqual(1442312355);
 	});
 
 	it("player should not be null", function() {
-		expect(score._date).not.toBeNull();
+		expect(goal._date).not.toBeNull();
 	});
 	
 	it("player should not be undefined", function() {
-		expect(score._date).not.toBeUndefined();
+		expect(goal._date).not.toBeUndefined();
 	});
 
 	it("match should not be null", function() {
-		expect(score._date).not.toBeNull();;
+		expect(goal._date).not.toBeNull();;
 	});
 
 	it("match should not be undefined", function() {
-		expect(score._date).not.toBeUndefined();
+		expect(goal._date).not.toBeUndefined();
 	});
 
 });

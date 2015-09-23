@@ -52,10 +52,10 @@ describe("Match instance", function() {
 	var data = {
 		id: 1002,
 		attendance: 40000,
-		away_scores: 1,
+		away_goals: 1,
 		away_team: new Team(away_team),
 		date: 1440757875,
-		home_scores: 1,
+		home_goals: 1,
 		home_team: new Team(home_team),
 		type: 'friendly',
 		venue: new Venue(venue)
@@ -69,16 +69,16 @@ describe("Match instance", function() {
 		expect(match._attendance).toEqual(40000);
 	});
 
-	it("away_scores should be" , function() {
-		expect(match._away_scores).toEqual(1);
+	it("away_goals should be" , function() {
+		expect(match._away_goals).toEqual(1);
 	});
 	
 	it("date should be" , function() {
 		expect(match._date).toEqual(1440757875);
 	});
 
-	it("home_scores should be" , function() {
-		expect(match._home_scores).toEqual(1);
+	it("home_goals should be" , function() {
+		expect(match._home_goals).toEqual(1);
 	});
 
 	it("type should be" , function() {
