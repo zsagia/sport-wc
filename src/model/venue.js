@@ -1,13 +1,13 @@
 function Venue(venue) {
-	this._id = venue.id;
-	this._name = venue.name;
-	this._city = venue.city;
-	this._country = venue.country;
-	this._image = venue.image;
-	this._built = venue.built;
-	this._capacity = venue.capacity;
+	this.id = venue.id;
+	this.name = venue.name;
+	this.city = venue.city;
+	this.country = venue.country;
+	this.image = venue.image;
+	this.built = venue.built;
+	this.capacity = venue.capacity;
 }
 
 Venue.prototype.toString = function() {
-	return this._name + ' - ' + this._city;
+	return this.name + ' - ' + this.city;
 };

@@ -1,12 +1,12 @@
 function Competition(data) {
-	this._id = data.id;
-	this._league = data.league;
-	this._season = data.season;
-	this._clubs = data.clubs;
+	this.id = data.id;
+	this.league = data.league;
+	this.season = data.season;
+	this.clubs = data.clubs;
 }
 
 Competition.prototype.toString = function() {
 	var separator = ' ';
 
-	return this._league + separator + this._season;
+	return this.league + separator + this.season;
 };

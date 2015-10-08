@@ -1,12 +1,13 @@
 function Team(data) {
-	this._id = data.id;
-	this._club = data.club;
-	this._name = data.name;
-	this._players = data.players;
-	this._trainers = data.trainers;
-	this._season = data.season;
+	this.id = data.id;
+	this.club = data.club;
+	this.name = data.name;
+	this.players = data.players;
+	this.trainers = data.trainers;
+	this.season = data.season;
 }
 
 Team.prototype.toString = function() {
-	return this._name;
+	return this.name;
+};
 };

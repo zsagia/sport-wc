@@ -1,14 +1,14 @@
 function Club(data) {
-	this._id = data.id;
-	this._established = data.established;
-	this._logo = data.logo;
-	this._manager = data.manager;
-	this._name = data.name;
-	this._nick_name = data.nick_name;
-	this._short_name = data.short_name;
-	this._site = data.site;
+	this.id = data.id;
+	this.established = data.established;
+	this.logo = data.logo;
+	this.manager = data.manager;
+	this.name = data.name;
+	this.nickName = data.nick_name;
+	this.shortName = data.short_name;
+	this.site = data.site;
 }
 
 Club.prototype.toString = function() {
-	return this._name;
+	return this.name;
 };

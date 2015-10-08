@@ -1,15 +1,16 @@
 function Person(data) {
-	this._id = data.id;
-	this._first_name = data.first_name;
-	this._second_name = data.second_name;
-	this._nick_name = data.nick_name;
-	this._height = data.height;
-	this._weight = data.weight;
-	this._birth_place = data.birth_place;
-	this._birth_date = data.birth_date;
-	this._nationality = data.nationality;
+	this.id = data.id;
+	this.firstName = data.first_name;
+	this.secondName = data.second_name;
+	this.nickName = data.nick_name;
+	this.height = data.height;
+	this.weight = data.weight;
+	this.birthPlace = data.birth_place;
+	this.birthDate = data.birth_date;
+	this.nationality = data.nationality;
 }
 
 Person.prototype.toString = function() {
-	return this._first_name + (this._nick_name ? this._nick_name : '') + this._second_name;
+	return this.firstName + ' ' + (this.nickName ? this.nickName + ' ' : '') + this.secondName;
+};
 };

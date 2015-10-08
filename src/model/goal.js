@@ -1,8 +1,8 @@
 function Goal(data) {
-	this._id = data.id;
-	this._match = data.match;
-	this._player = data.player;
-	this._date = data.date;
+	this.id = data.id;
+	this.date = data.date;
+	this.match = data.match;
+	this.player = data.player;
 }
 
 Goal.prototype.toString = function() {
