@@ -5,8 +5,38 @@ function Goal(data) {
 	this.setPlayer(data.player);
 }
 
+Goal.prototype.getMatchTitle = function() {
+	var match = this.match;
+	var matchTitle;
+	
+	if (typeof match === 'string') {
+		matchTitle = match;
+	}
+	else if (typeof match === 'object') {
+		matchTitle = match.toString();
+	}
+};
+
+Goal.prototype.getPlayerName = function() {
+	var player = this.player;
+	var playerName;
+
+	if (typeof player === 'object') {
+		playerName = player.getFullName();
+	}
+	else if (typeof player === 'string') {
+		playerName = player;
+	}
+
+	return playerName;
+};
+
 Goal.prototype.toString = function() {
-	var player = this._player;
+	var match = this.match;
+
+	return this.getPlayerName() + ' ' + this.date + '. minutes' + ' ' + match.toString();
+};
+
 Goal.prototype.setMatch = function(value) {
 	if (typeof value === 'string') {
 		this.match = value;
@@ -19,7 +49,6 @@ Goal.prototype.setMatch = function(value) {
 	}
 };
 
-	return player.toString();
 Goal.prototype.setPlayer = function(value) {
 	if (typeof value === 'string') {
 		this.player = value;

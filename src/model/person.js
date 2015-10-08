@@ -13,4 +13,7 @@ function Person(data) {
 Person.prototype.toString = function() {
 	return this.firstName + ' ' + (this.nickName ? this.nickName + ' ' : '') + this.secondName;
 };
+
+Person.prototype.getFullName = function() {
+	return this.firstName + ' ' + this.secondName;
 };

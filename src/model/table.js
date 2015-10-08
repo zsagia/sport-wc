@@ -44,9 +44,27 @@ Table.prototype.setMatches = function(value) {
 
 	this.matches = newArray;
 };
+
+Table.prototype.getTableTitle = function() {
+	var competition = this.competition;
+	var tableTitle;
+
+	if (typeof competition === 'string') {
+		tableTitle = competition;
+	}
+	else if (typeof competition === 'number') {
+	}
+	else if (typeof competition === 'object') {
+		tableTitle = competition.toString()
+	}
+
+	return tableTitle;
+};
+
 Table.prototype.toString = function() {
 	var competition = this.competition;
 	var separator = ' ';
 
-	return competition._league + separator + competition._season;
+	return getTableTitle();
+};
 };

@@ -12,11 +12,39 @@ function Match(data) {
 }
 
 Match.prototype.toString = function() {
-	var away_club = this._away_team._club;
-	var home_club = this._home_team._club;
 	var separator = ' - ';
 
-	return home_club._short_name + separator + away_club._short_name;
+	return this.getHomeTeamName() + separator + this.getAwayTeamName();
+};
+
+Match.prototype.getHomeTeamName = function() {
+	var team = this.homeTeam;
+	var teamName;
+
+	if (typeof team === 'string') {
+		teamName = team;
+	}
+	else if (typeof team === 'object') {
+		teamName = team.getClubName();
+	}
+
+	return teamName;
+};
+
+Match.prototype.getAwayTeamName = function() {
+	var team = this.awayTeam,
+		teamName;
+
+	if (typeof team === 'string') {
+		teamName = team;
+	}
+	else if (typeof team === 'object') {
+		teamName = team.getClubName();
+	}
+
+	return teamName;
+};
+
 Match.prototype.setAwayTeam = function(value) {
 	if (typeof value === 'string') {
 		this.awayTeam = value;

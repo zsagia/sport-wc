@@ -22,3 +22,7 @@ Player.prototype.setTeam = function(value) {
 		this.team = new Team(value);
 	}
 };
+
+Player.prototype.toString = function() {
+	return toString();
+};
