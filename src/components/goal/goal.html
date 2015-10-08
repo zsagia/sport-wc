@@ -1,0 +1,58 @@
+<script src="../../model/goal.js"></script>
+<script src="../../model/person.js"></script>
+<script src="../../model/player.js"></script>
+<script src="../../model/match.js"></script>
+
+<template id="goalTemplate">
+	<style>
+		.goal {
+			display: inline-block;
+			width: 400px;
+		}
+		.goal .player-image {
+			width: 60px;
+		}
+		.goal > .content {
+			display: inline-block;
+		}
+		.goal > .title {
+			margin: 0 5px;
+			font-size: large;
+		}
+	</style>
+	<section class="goal">
+		<image class="player-image">
+		<span class="title"></span>
+	</section>
+</template>
+
+<script type="text/javascript">
+	(function GoalView() {
+		var GoalPrototype = Object.create(HTMLElement.prototype);
+
+		var importDocument = document.currentScript.ownerDocument;
+
+		var goalTemplate = importDocument.querySelector('#goalTemplate').content;
+
+		GoalPrototype.createdCallback = function() {
+			var data = JSON.parse(this.getAttribute('data'));
+
+			var goal = new Goal(data);
+			
+			var player = goal.player;
+
+			var goalElement = goalTemplate.querySelector('.goal');
+
+			goalElement.querySelector('.player-image').src = player.image;
+			goalElement.querySelector('.title').textContent = goal.toString();
+
+			this.appendChild(document.importNode(goalTemplate, true));
+		}
+
+		document.registerElement(
+			'swc-goal', {
+				prototype: GoalPrototype
+			}
+		);
+	})();
+</script>
