@@ -2,7 +2,7 @@ describe("Team instance", function() {
 	var team;
 	var data = {
 		id: 23456,
-		club: 34567,
+		club: 'LIVERPOOL FC',
 		name: 'first team',
 		players: {},
 		season: {},
@@ -14,7 +14,10 @@ describe("Team instance", function() {
 	});
 
 	it("name should be" , function() {
-		expect(team._name).toEqual('first team');
+		expect(team.name).toEqual('first team');
 	});
 
+	it("club should be a String" , function() {
+		expect(typeof team.club === 'string').toEqual(true);
+	});
 });

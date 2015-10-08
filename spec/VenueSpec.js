@@ -13,10 +13,10 @@ describe("Venue instance", function() {
 	});
 
 	it("should be built attribute 1909", function() {
-		expect(venue._built).toEqual(1909);
+		expect(venue.built).toEqual(1909);
 	});
 
 	it("id should be undefined", function() {
-		expect(venue._id).toBe(undefined);
+		expect(venue.id).toBe(undefined);
   });
 });

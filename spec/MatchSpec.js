@@ -25,7 +25,7 @@ describe("Match instance", function() {
 
 	var away_team = {
 		id: 23457,
-		club: new Club(away_club),
+		club: away_club,
 		name: 'first team',
 		players: {},
 		season: {},
@@ -34,7 +34,7 @@ describe("Match instance", function() {
 
 	var home_team = {
 		id: 23456,
-		club: new Club(home_club),
+		club:home_club,
 		name: 'first team',
 		players: {},
 		season: {},
@@ -53,10 +53,10 @@ describe("Match instance", function() {
 		id: 1002,
 		attendance: 40000,
 		away_goals: 1,
-		away_team: new Team(away_team),
+		away_team: away_team,
 		date: 1440757875,
 		home_goals: 1,
-		home_team: new Team(home_team),
+		home_team: home_team,
 		type: 'friendly',
 		venue: new Venue(venue)
 	};
@@ -66,27 +66,36 @@ describe("Match instance", function() {
 	});
 
 	it("attendance should be" , function() {
-		expect(match._attendance).toEqual(40000);
+		expect(match.attendance).toEqual(40000);
 	});
 
 	it("away_goals should be" , function() {
-		expect(match._away_goals).toEqual(1);
+		expect(match.awayGoals).toEqual(1);
 	});
 	
 	it("date should be" , function() {
-		expect(match._date).toEqual(1440757875);
+		expect(match.date).toEqual(1440757875);
 	});
 
-	it("home_goals should be" , function() {
-		expect(match._home_goals).toEqual(1);
+	it("homeGoals should be" , function() {
+		expect(match.homeGoals).toEqual(1);
 	});
 
 	it("type should be" , function() {
-		expect(match._type).toEqual('friendly');
+		expect(match.type).toEqual('friendly');
 	});
 
 	it("toString should be" , function() {
 		expect(match.toString()).toEqual('Tottanham Hotspurs - Liverpool FC');
+	});
+	
+	it("awayTeam should be" , function() {
+		expect(typeof match.awayTeam === 'object').toEqual(true);
+	});
+
+	it("after a string setting away team should be" , function() {
+		match.awayTeam = 'Liverpool FC';
+		expect(typeof match.awayTeam === 'string').toEqual(true);
 	});
 
 });

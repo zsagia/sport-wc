@@ -38,23 +38,23 @@ describe("Goal instance", function() {
 	});
 
 	it("date should be equal", function() {
-		expect(goal._date).toEqual(1442312355);
+		expect(goal.date).toEqual(1442312355);
 	});
 
 	it("player should not be null", function() {
-		expect(goal._date).not.toBeNull();
+		expect(goal.date).not.toBeNull();
 	});
 	
 	it("player should not be undefined", function() {
-		expect(goal._date).not.toBeUndefined();
+		expect(goal.date).not.toBeUndefined();
 	});
 
 	it("match should not be null", function() {
-		expect(goal._date).not.toBeNull();;
+		expect(goal.date).not.toBeNull();;
 	});
 
 	it("match should not be undefined", function() {
-		expect(goal._date).not.toBeUndefined();
+		expect(goal.date).not.toBeUndefined();
 	});
 
 });

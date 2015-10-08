@@ -12,15 +12,15 @@ describe("Competition instance", function() {
 	});
 
 	it("league should not be null", function() {
-		expect(competition._league).not.toBeNull();
+		expect(competition.league).not.toBeNull();
 	});
 
 	it("season should not be null", function() {
-		expect(competition._season).not.toBeNull();
+		expect(competition.season).not.toBeNull();
 	});
 
 	it("clubs not be null", function() {
-		expect(competition._clubs).not.toBeNull();
+		expect(competition.clubs).not.toBeNull();
 	});
 
 });

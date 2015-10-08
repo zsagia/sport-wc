@@ -10,50 +10,55 @@ describe("Player instance", function() {
 		number: 17,
 		position: 'forward',
 		second_name: 'Sánches',
+		team: 'Arsenal',
 		weight: 62
 	}
+
+	afterEach(function() {
+		player = null;
+	});
 
 	beforeEach(function() {
 		player = new Player(data);
 	});
 
-	it("first_name should be", function() {
-		expect(player._first_name).toEqual('Alexis');
+	it("firstName should be", function() {
+		expect(player.firstName).toEqual('Alexis');
 	});
 
-	it("second_name should be", function() {
-		expect(player._second_name).toEqual('Sánches');
+	it("secondName should be", function() {
+		expect(player.secondName).toEqual('Sánches');
 	});
 
 	it("height should be", function() {
-		expect(player._height).toEqual(168);
+		expect(player.height).toEqual(168);
 	});
 
 	it("weight should be", function() {
-		expect(player._weight).toEqual(62);
+		expect(player.weight).toEqual(62);
 	});
 
 	it("birth_date should be", function() {
-		expect(player._birth_date).toEqual(598492800000);
+		expect(player.birthDate).toEqual(598492800000);
 	});
 
 	it("birth_place should be", function() {
-		expect(player._birth_place).toEqual('Chile');
+		expect(player.birthPlace).toEqual('Chile');
 	});
 
 	it("nationality should be", function() {
-		expect(player._nationality).toEqual('Chile');
+		expect(player.nationality).toEqual('Chile');
 	});
 
 	it("number should be", function() {
-		expect(player._number).toEqual(17);
+		expect(player.number).toEqual(17);
 	});
 
 	it("birth_place should be", function() {
-		expect(player._position).toEqual('forward');
+		expect(player.position).toEqual('forward');
 	});
 
 	it("nationality should be", function() {
-		expect(player._team).toEqual(undefined);
+		expect(player.team).toEqual('Arsenal');
 	});
 });

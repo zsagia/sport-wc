@@ -16,31 +16,31 @@ describe("Club instance", function() {
 	});
 
 	it("established should be equal", function() {
-		expect(club._established).toEqual(1892);
+		expect(club.established).toEqual(1892);
 	});
 
 	it("logo attribute should be equal", function() {
-		expect(club._logo).toEqual('http://www.premierleague.com/content/dam/premierleague/shared-images/clubs/s/spurs/logo.png/_jcr_content/renditions/cq5dam.thumbnail.140.100.png');
+		expect(club.logo).toEqual('http://www.premierleague.com/content/dam/premierleague/shared-images/clubs/s/spurs/logo.png/_jcr_content/renditions/cq5dam.thumbnail.140.100.png');
 	});
 
 	it("manager should be equal", function() {
-		expect(club._manager).toBe('Mauricio Pochettino');
+		expect(club.manager).toBe('Mauricio Pochettino');
 	});
 
 	it("name should be equal", function() {
-		expect(club._name).toBe('TOTTENHAM HOTSPUR FOOTBALL CLUB');
+		expect(club.name).toBe('TOTTENHAM HOTSPUR FOOTBALL CLUB');
 	});
 
 	it("nick_name should be equal", function() {
-		expect(club._nick_name).toBe('Spurs / Lilywhites');
+		expect(club.nickName).toBe('Spurs / Lilywhites');
 	});
 
 	it("short_name should be equal", function() {
-		expect(club._short_name).toEqual('Tottanham Hotspurs');
+		expect(club.shortName).toEqual('Tottanham Hotspurs');
 	});
 
 	it("site should be equal", function() {
-		expect(club._site).toEqual('http://www.tottenhamhotspur.com/home');
+		expect(club.site).toEqual('http://www.tottenhamhotspur.com/home');
 	});
 
 });

@@ -15,31 +15,31 @@ describe("Person instance", function() {
 		person = new Person(data);
 	});
 
-	it("first_name should be", function() {
-		expect(person._first_name).toEqual('Alexis');
+	it("firstName should be", function() {
+		expect(person.firstName).toEqual('Alexis');
 	});
 
-	it("second_name should be", function() {
-		expect(person._second_name).toEqual('Sánches');
+	it("secondName should be", function() {
+		expect(person.secondName).toEqual('Sánches');
 	});
 
 	it("height should be", function() {
-		expect(person._height).toEqual(168);
+		expect(person.height).toEqual(168);
 	});
 
 	it("weight should be", function() {
-		expect(person._weight).toEqual(62);
+		expect(person.weight).toEqual(62);
 	});
 
-	it("birth_date should be", function() {
-		expect(person._birth_date).toEqual(598492800000);
+	it("birthDate should be", function() {
+		expect(person.birthDate).toEqual(598492800000);
 	});
 
 	it("birth_place should be", function() {
-		expect(person._birth_place).toEqual('Chile');
+		expect(person.birthPlace).toEqual('Chile');
 	});
 
 	it("nationality should be", function() {
-		expect(person._nationality).toEqual('Chile');
+		expect(person.nationality).toEqual('Chile');
 	});
 });

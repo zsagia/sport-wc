@@ -11,10 +11,10 @@ describe("Table instance", function() {
 	});
 
 	it("competition should not be null", function() {
-		expect(table._competition).not.toBeNull();
+		expect(table.competition).not.toBeNull();
 	});
 
 	it("matches should not be null", function() {
-		expect(table._matches).not.toBeNull();
+		expect(table.matches).not.toBeNull();
 	});
 });
