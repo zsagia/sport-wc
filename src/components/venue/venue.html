@@ -37,12 +37,12 @@
 
 			var venueElement = venueTemplate.querySelector('.venue');
 
-			venueElement.querySelector('.built').textContent = venue._built;
-			venueElement.querySelector('.capacity').textContent = venue._capacity;
-			venueElement.querySelector('.city').textContent = venue._city;
-			venueElement.querySelector('.country').textContent = venue._country;
-			venueElement.querySelector('.image').src = venue._image;
-			venueElement.querySelector('.name').textContent = venue._name;
+			venueElement.querySelector('.built').textContent = venue.built;
+			venueElement.querySelector('.capacity').textContent = venue.capacity;
+			venueElement.querySelector('.city').textContent = venue.city;
+			venueElement.querySelector('.country').textContent = venue.country;
+			venueElement.querySelector('.image').src = venue.image;
+			venueElement.querySelector('.name').textContent = venue.name;
 
 			this.appendChild(document.importNode(venueTemplate, true));
 		}
