@@ -7,6 +7,7 @@ function Match(data) {
 	this.homeGoals = data.home_goals;
 	this.setHomeTeam(data.home_team);
 	this.goals = data.goals;
+	this.round = data.round;
 	this.type = data.type;
 	this.venue = data.venue;
 }
