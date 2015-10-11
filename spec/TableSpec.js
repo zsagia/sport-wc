@@ -17,4 +17,20 @@ describe("Table instance", function() {
 	it("matches should not be null", function() {
 		expect(table.matches).not.toBeNull();
 	});
+
+	it("dataIsMatches function should return true" , function() {
+		expect(table.dataIsMatches([])).toEqual(true);
+	});
+
+	it("dataIsMatches function should return false" , function() {
+		expect(table.dataIsMatches({})).toEqual(false);
+	});
+
+	it("dataIsSummarized function should return true" , function() {
+		expect(table.dataIsSummarized({})).toEqual(true);
+	});
+
+	it("dataIsSummarized function should return false" , function() {
+		expect(table.dataIsSummarized([])).toEqual(false);
+	});
 });
