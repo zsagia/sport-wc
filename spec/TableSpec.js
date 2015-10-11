@@ -1,10 +1,6 @@
 describe("Table instance", function() {
 	var table;
-	var data = {
-		id: 34567,
-		competition: new Competition({}),
-		matches: []
-	};
+	var data = [];
 
 	beforeEach(function() {
 		table = new Table(data);
