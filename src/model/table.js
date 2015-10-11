@@ -131,14 +131,14 @@ Table.prototype.dataIsMatches = function(data) {
 	function dataIsSummarized
 */
 Table.prototype.dataIsSummarized = function(data) {
-	return ((typeof data === 'object') && ((data instanceof Array) != true)) ? true : false; 
+	return ((typeof data === 'object') && ((data instanceof Array) !== true)) ? true : false; 
 };
 
 /*
 	function makeTeamRounds
 */
 Table.prototype.makeTeamRounds = function(matches) {
-	var teamRounds = {}
+	var teamRounds = {};
 
 	for (var i = 0; i < matches.length; i++) {
 		var match = matches[i];
