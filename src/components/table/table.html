@@ -1,0 +1,155 @@
+<script src="../../model/table.js"></script>
+<script src="../../model/match.js"></script>
+<script src="../../model/team.js"></script>
+<script src="../../model/club.js"></script>
+
+<template id="tableTemplate">
+	<style>
+		.swc-table {
+		}
+		.swc-table td {
+			border: 1px solid #ddd;
+			color: #333;
+			font-family: Arial,Helvetica,sans-serif;
+			font-size: 12px;
+			font-weight: bold;
+			padding: 5px;
+			text-align: center;
+		}
+		.swc-table td.team {
+			text-align: left;
+		}
+		.swc-table tr.first {
+			background-color: #8cbde0;
+		}
+		.swc-table tr.second, .swc-table tr.third, .swc-table tr.fourth {
+			background-color: #c8dceb;
+		}
+		.swc-table tr.fifth {
+			background-color: #edf5fa;
+		}
+		.swc-table tr.eighteenth, .swc-table tr.nineteenth, .swc-table tr.twentieth {
+			background-color: #e0e6e9;
+		}
+	</style>
+	<section class="swc-table">
+		<table class="table">
+			<caption></caption>
+			<thead></thead>
+			<tfoot></tfoot>
+			<tbody></tbody>
+		</table>
+	</section>
+</template>
+
+<template id="rowTemplate">
+	<tr>
+		<td class="position"></td>
+		<td class="team"></td>
+		<td class="matches"></td>
+		<td class="won"></td>
+		<td class="drawn"></td>
+		<td class="lost"></td>
+		<td class="goal-for"></td>
+		<td class="goal-against"></td>
+		<td class="point"></tt>
+	</tr>
+</template>
+
+<script type="text/javascript">
+	(function TableView() {
+		var TablePrototype = Object.create(HTMLElement.prototype);
+
+		var importDocument = document.currentScript.ownerDocument;
+
+		var tableTemplate = importDocument.querySelector('#tableTemplate').content;
+		var rowTemplate = importDocument.querySelector('#rowTemplate');
+
+		TablePrototype.createdCallback = function() {
+			var showRound = this.getAttribute('showRound');
+
+			// Onlx demo mode
+			/*var data = window.matches;
+			var teamsData = window.teams;
+
+			teamsData.forEach(
+				function(team) {
+					localStorage.setItem(team.id, JSON.stringify(team));
+				}
+			);*/
+
+			var data = window.table;
+
+			var table = new Table(data);
+
+			var tableElement = tableTemplate.querySelector('.swc-table table');
+
+			tableElement.querySelector('caption').textContent = table.getTableTitle();
+
+			var tableBodyElement = tableTemplate.querySelector('.swc-table table tbody');
+
+			var rounds = table.rounds;
+
+			var round = rounds[showRound - 1] || rounds[rounds.length - 1];
+
+			for (var i = 0; i < round.length; i++) {
+				var team = round[i];
+				
+				setTDData(rowTemplate, team, i + 1);
+				
+
+				tableBodyElement.appendChild(document.importNode(rowTemplate.content, true));
+			}
+
+			this.appendChild(document.importNode(tableTemplate, true));
+		}
+
+		document.registerElement(
+			'swc-table', {
+				prototype: TablePrototype
+			}
+		);
+
+
+
+		var setTDData = function(rowTemplate, team, position) {
+			if (position === 1) {
+				rowTemplate.content.querySelector('tr').className = 'first';
+			}
+			else if (position === 2) {
+				rowTemplate.content.querySelector('tr').className = 'second';
+			}
+			else if (position === 3) {
+				rowTemplate.content.querySelector('tr').className = 'third';
+			}
+			else if (position === 4) {
+				rowTemplate.content.querySelector('tr').className = 'fourth';
+			}
+			else if (position === 5) {
+				rowTemplate.content.querySelector('tr').className = 'fifth';
+			}
+			else if (position === 18) {
+				rowTemplate.content.querySelector('tr').className = 'eighteenth';
+			}
+			else if (position === 19) {
+				rowTemplate.content.querySelector('tr').className = 'nineteenth';
+			}
+			else if (position === 20) {
+				rowTemplate.content.querySelector('tr').className = 'twentieth';
+			}
+			else {
+				rowTemplate.content.querySelector('tr').className = '';
+			}
+
+			rowTemplate.content.querySelector('td.position').textContent = position;
+			rowTemplate.content.querySelector('td.team').textContent = team.team_name;
+			rowTemplate.content.querySelector('td.matches').textContent = team.played;
+			rowTemplate.content.querySelector('td.won').textContent = team.won;
+			rowTemplate.content.querySelector('td.drawn').textContent = team.drawn;
+			rowTemplate.content.querySelector('td.lost').textContent = team.lost;
+			rowTemplate.content.querySelector('td.goal-for').textContent = team.goal_for;
+			rowTemplate.content.querySelector('td.goal-against').textContent = team.goal_against;
+			rowTemplate.content.querySelector('td.point').textContent = team.points;
+		};
+	})();
+</script>
