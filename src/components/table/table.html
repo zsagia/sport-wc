@@ -35,8 +35,19 @@
 		.swc-table thead tr, .swc-table tfoot th {
 			background-color: #8b95a4
 		}
+		.swc-table input[type=range] {
+			width: 100%;
+		}
+		.swc-table header {
+			padding: 15px;
+		}
 	</style>
-	<section class="swc-table">
+
+	<section class="swc-component swc-table">
+		<header>
+			<input id="round" type="range"/>
+		</header>
+
 		<table class="table">
 			<caption></caption>
 			<thead></thead>
@@ -56,7 +67,7 @@
 		<td class="lost"></td>
 		<td class="goal-for"></td>
 		<td class="goal-against"></td>
-		<td class="point"></tt>
+		<td class="point"></td>
 	</tr>
 </template>
 
@@ -84,45 +95,58 @@
 			headTemplate = importDocument.querySelector('#headTemplate');
 
 		TablePrototype.createdCallback = function() {
-			var showRound = this.getAttribute('showRound');
+			var instance = this;
 
-			// Onlx demo mode
-			/*var data = window.matches;
-			var teamsData = window.teams;
+			var root = instance.createShadowRoot(),
+				showRound = instance.getAttribute('showRound'),
+				data = window.matches,
+				teamsData = window.teams;
 
 			teamsData.forEach(
 				function(team) {
 					localStorage.setItem(team.id, JSON.stringify(team));
 				}
-			);*/
+			);
 
-			var data = window.table;
+			//var data = window.table;
 
-			var table = new Table(data);
-
-			var tableElement = tableTemplate.querySelector('.swc-table table');
+			var table = new Table(data),
+				tableElement = tableTemplate.content.querySelector('.swc-table table');
 
 			tableElement.querySelector('caption').textContent = table.getTableTitle();
 
-			var tableBodyElement = tableTemplate.querySelector('.swc-table table tbody');
+			var tableBodyElement = tableTemplate.content.querySelector('.swc-table table tbody'),
+				headElement = tableTemplate.content.querySelector('thead'),
+				footElement = tableTemplate.content.querySelector('tfoot'),
+				roundElement = tableTemplate.content.querySelector('#round');
 
-			var rounds = table.rounds;
 			setTHHead(headTemplate);
 
-			var round = rounds[showRound - 1] || rounds[rounds.length - 1];
 			headElement.appendChild(document.importNode(headTemplate.content, true));
 			footElement.appendChild(document.importNode(headTemplate.content, true));
 
-			for (var i = 0; i < round.length; i++) {
-				var team = round[i];
-				
-				setTDData(rowTemplate, team, i + 1);
-				
+			var rounds = table.rounds,
+				round = rounds[showRound - 1] || rounds[rounds.length - 1];
 
-				tableBodyElement.appendChild(document.importNode(rowTemplate.content, true));
-			}
+			createRoundRange(rounds, showRound, roundElement);
 
-			this.appendChild(document.importNode(tableTemplate, true));
+			createTableBodyElement(round, rowTemplate, tableBodyElement);
+
+			root.appendChild(document.importNode(tableTemplate.content, true));
+
+			var rangeElement = root.querySelector('#round');
+
+			rangeElement.addEventListener('change', function(event) {
+				var round = rounds[event.currentTarget.value - 1];
+
+				tableBodyElement.innerHTML = '';
+
+				createTableBodyElement(round, rowTemplate, tableBodyElement);
+
+				var tBodyRoot = root.querySelector('tbody');
+
+				tBodyRoot.innerHTML = tableBodyElement.innerHTML;
+			}, false);
 		}
 
 		document.registerElement(
@@ -131,6 +155,28 @@
 			}
 		);
 
+		/*
+			createRoundRange function
+		*/
+		var createRoundRange = function (rounds, showRound, roundElement) {
+			roundElement.setAttribute('min', 1);
+			roundElement.setAttribute('max', rounds.length);
+			roundElement.setAttribute('steps', 1);
+			roundElement.setAttribute('value', showRound);
+		};
+
+		/*
+			createTableBodyElement function
+		*/
+		var createTableBodyElement = function(round, rowTemplate, tableBodyElement) {
+			for (var i = 0; i < round.length; i++) {
+				var team = round[i];
+				
+				setTDData(rowTemplate, team, i + 1);
+
+				tableBodyElement.appendChild(document.importNode(rowTemplate.content, true));
+			}
+		};
 
 		/*
 			setTHHead function
@@ -147,6 +193,9 @@
 			headTemplate.content.querySelector('th.col-point').textContent = 'PTS';
 		};
 
+		/*
+			setTDData function
+		*/
 		var setTDData = function(rowTemplate, team, position) {
 			if (position === 1) {
 				rowTemplate.content.querySelector('tr').className = 'first';
