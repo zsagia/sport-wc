@@ -61,8 +61,10 @@ Table.prototype.cloneTeamRound = function(teamRound) {
 	function doMatches
 */
 Table.prototype.doMatches = function(data) {
-	var teamRounds = this.makeTeamRounds(data);
-	var rounds = [];
+	var teamRounds = this.makeTeamRounds(data),
+		rounds = [],
+		sortingTeams = this.sortingTeams;
+
 
 	Object.keys(teamRounds).forEach(function(key) {
 		var teamRound = teamRounds[key];
@@ -72,7 +74,7 @@ Table.prototype.doMatches = function(data) {
 			round.push(teamRound[team]);
 		});
 
-		round.sort(this.sortingTeams);
+		round.sort(sortingTeams);
 		round.reverse();
 
 		rounds.push(round);
