@@ -35,6 +35,8 @@
 		var goalTemplate = importDocument.querySelector('#goalTemplate').content;
 
 		GoalPrototype.createdCallback = function() {
+			var root = this.createShadowRoot();
+
 			var data = JSON.parse(this.getAttribute('data'));
 
 			var goal = new Goal(data);
@@ -46,7 +48,7 @@
 			goalElement.querySelector('.player-image').src = player.image;
 			goalElement.querySelector('.title').textContent = goal.toString();
 
-			this.appendChild(document.importNode(goalTemplate, true));
+			root.appendChild(document.importNode(goalTemplate, true));
 		}
 
 		document.registerElement(

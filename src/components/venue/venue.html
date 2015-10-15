@@ -31,6 +31,8 @@
 		var venueTemplate = importDocument.querySelector('#venueTemplate').content;
 
 		VenuePrototype.createdCallback = function() {
+			var root = this.createShadowRoot();
+
 			var data = JSON.parse(this.getAttribute('data'));
 
 			var venue = new Venue(data);
@@ -44,7 +46,7 @@
 			venueElement.querySelector('.image').src = venue.image;
 			venueElement.querySelector('.name').textContent = venue.name;
 
-			this.appendChild(document.importNode(venueTemplate, true));
+			root.appendChild(document.importNode(venueTemplate, true));
 		}
 
 		document.registerElement(
