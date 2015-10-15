@@ -689,6 +689,7 @@ window.table = {
 	team_results: [
 		{
 			position: 1,
+			last_position: 1,
 			team_name: 'Manchester City',
 			won: 6,
 			drawn: 0,
@@ -700,6 +701,7 @@ window.table = {
 		},
 		{
 			position: 2,
+			last_position: 6,
 			team_name: 'Arsenal',
 			won: 5,
 			drawn: 1,
@@ -711,6 +713,7 @@ window.table = {
 		},
 		{
 			position: 3,
+			last_position: 2,
 			team_name: 'Manchester United',
 			won: 5,
 			drawn: 1,
@@ -722,6 +725,7 @@ window.table = {
 		},
 		{
 			position: 4,
+			last_position: 3,
 			team_name: 'Crystal Palace',
 			won: 5,
 			drawn: 0,
@@ -733,6 +737,7 @@ window.table = {
 		},
 		{
 			position: 5,
+			last_position: 4,
 			team_name: 'Leicester City',
 			won: 4,
 			drawn: 3,
@@ -744,6 +749,7 @@ window.table = {
 		},
 		{
 			position: 6,
+			last_position: 5,
 			team_name: 'West Ham United',
 			won: 4,
 			drawn: 2,
@@ -755,6 +761,7 @@ window.table = {
 		},
 		{
 			position: 7,
+			last_position: 7,
 			team_name: 'Everton',
 			won: 3,
 			drawn: 4,
@@ -766,6 +773,7 @@ window.table = {
 		},
 		{
 			position: 8,
+			last_position: 8,
 			team_name: 'Tottanham Hotspurs',
 			won: 3,
 			drawn: 4,
@@ -776,6 +784,7 @@ window.table = {
 			comment: '' 
 		},{
 			position: 9,
+			last_position: 9,
 			team_name: 'Southampton',
 			won: 3,
 			drawn: 3,
@@ -787,6 +796,7 @@ window.table = {
 		},
 		{
 			position: 10,
+			last_position: 10,
 			team_name: 'Liverpool',
 			won: 3,
 			drawn: 3,
@@ -798,6 +808,7 @@ window.table = {
 		},
 		{
 			position: 11,
+			last_position: 12,
 			team_name: 'Swansea City',
 			won: 2,
 			drawn: 4,
@@ -809,6 +820,7 @@ window.table = {
 		},
 		{
 			position: 12,
+			last_position: 11,
 			team_name: 'Watford',
 			won: 2,
 			drawn: 4,
@@ -820,6 +832,7 @@ window.table = {
 		},
 		{
 			position: 13,
+			last_position: 13,
 			team_name: 'Norwich City',
 			won: 2,
 			drawn: 3,
@@ -831,6 +844,7 @@ window.table = {
 		},
 		{
 			position: 14,
+			last_position: 14,
 			team_name: 'Stoke City',
 			won: 2,
 			drawn: 3,
@@ -842,6 +856,7 @@ window.table = {
 		},
 		{
 			position: 15,
+			last_position: 15,
 			team_name: 'Bournemouth',
 			won: 2,
 			drawn: 2,
@@ -853,6 +868,7 @@ window.table = {
 		},
 		{
 			position: 16,
+			last_position: 16,
 			team_name: 'Chelsea',
 			won: 2,
 			drawn: 2,
@@ -864,6 +880,7 @@ window.table = {
 		},
 		{
 			position: 17,
+			last_position: 17,
 			team_name: 'West Bromwich Albion',
 			won: 2,
 			drawn: 2,
@@ -875,6 +892,7 @@ window.table = {
 		},
 		{
 			position: 18,
+			last_position: 18,
 			team_name: 'Aston Villa',
 			won: 1,
 			drawn: 1,
@@ -886,6 +904,7 @@ window.table = {
 		},
 		{
 			position: 19,
+			last_position: 19,
 			team_name: 'Sunderland',
 			won: 0,
 			drawn: 3,
@@ -896,6 +915,7 @@ window.table = {
 			comment: ''
 		},{
 			position: 20,
+			last_position: 20,
 			team_name: 'Newcastle United',
 			won: 0,
 			drawn: 3,
