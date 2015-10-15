@@ -5,9 +5,10 @@
 
 <template id="tableTemplate">
 	<style>
-		.swc-table {
+		.swc-table table{
+			width: 100%;
 		}
-		.swc-table td {
+		.swc-table td, .swc-table th {
 			border: 1px solid #ddd;
 			color: #333;
 			font-family: Arial,Helvetica,sans-serif;
@@ -16,7 +17,7 @@
 			padding: 5px;
 			text-align: center;
 		}
-		.swc-table td.team {
+		.swc-table td.club {
 			text-align: left;
 		}
 		.swc-table tr.first {
@@ -30,6 +31,9 @@
 		}
 		.swc-table tr.eighteenth, .swc-table tr.nineteenth, .swc-table tr.twentieth {
 			background-color: #e0e6e9;
+		}
+		.swc-table thead tr, .swc-table tfoot th {
+			background-color: #8b95a4
 		}
 	</style>
 	<section class="swc-table">
@@ -45,8 +49,8 @@
 <template id="rowTemplate">
 	<tr>
 		<td class="position"></td>
-		<td class="team"></td>
-		<td class="matches"></td>
+		<td class="club"></td>
+		<td class="played"></td>
 		<td class="won"></td>
 		<td class="drawn"></td>
 		<td class="lost"></td>
@@ -56,14 +60,28 @@
 	</tr>
 </template>
 
+<template id="headTemplate">
+	<tr>
+		<th class="col-position"></th>
+		<th class="col-club"></th>
+		<th class="col-played"></th>
+		<th class="col-won"></th>
+		<th class="col-drawn"></th>
+		<th class="col-lost"></th>
+		<th class="col-goal-for"></th>
+		<th class="col-goal-against"></th>
+		<th class="col-point"></th>
+	</tr>
+</template>
+
+
 <script type="text/javascript">
 	(function TableView() {
-		var TablePrototype = Object.create(HTMLElement.prototype);
-
-		var importDocument = document.currentScript.ownerDocument;
-
-		var tableTemplate = importDocument.querySelector('#tableTemplate').content;
-		var rowTemplate = importDocument.querySelector('#rowTemplate');
+		var TablePrototype = Object.create(HTMLElement.prototype),
+			importDocument = document.currentScript.ownerDocument,
+			tableTemplate = importDocument.querySelector('#tableTemplate'),
+			rowTemplate = importDocument.querySelector('#rowTemplate'),
+			headTemplate = importDocument.querySelector('#headTemplate');
 
 		TablePrototype.createdCallback = function() {
 			var showRound = this.getAttribute('showRound');
@@ -89,8 +107,11 @@
 			var tableBodyElement = tableTemplate.querySelector('.swc-table table tbody');
 
 			var rounds = table.rounds;
+			setTHHead(headTemplate);
 
 			var round = rounds[showRound - 1] || rounds[rounds.length - 1];
+			headElement.appendChild(document.importNode(headTemplate.content, true));
+			footElement.appendChild(document.importNode(headTemplate.content, true));
 
 			for (var i = 0; i < round.length; i++) {
 				var team = round[i];
@@ -111,6 +132,20 @@
 		);
 
 
+		/*
+			setTHHead function
+		*/
+		var setTHHead = function(headTemplate) {
+			headTemplate.content.querySelector('th.col-position').textContent = 'POS';
+			headTemplate.content.querySelector('th.col-club').textContent = 'CLUB';
+			headTemplate.content.querySelector('th.col-played').textContent = 'P';
+			headTemplate.content.querySelector('th.col-won').textContent = 'W';
+			headTemplate.content.querySelector('th.col-drawn').textContent = 'D';
+			headTemplate.content.querySelector('th.col-lost').textContent = 'L';
+			headTemplate.content.querySelector('th.col-goal-for').textContent = 'GF';
+			headTemplate.content.querySelector('th.col-goal-against').textContent = 'GA';
+			headTemplate.content.querySelector('th.col-point').textContent = 'PTS';
+		};
 
 		var setTDData = function(rowTemplate, team, position) {
 			if (position === 1) {
@@ -142,8 +177,8 @@
 			}
 
 			rowTemplate.content.querySelector('td.position').textContent = position;
-			rowTemplate.content.querySelector('td.team').textContent = team.team_name;
-			rowTemplate.content.querySelector('td.matches').textContent = team.played;
+			rowTemplate.content.querySelector('td.club').textContent = team.team_name;
+			rowTemplate.content.querySelector('td.played').textContent = team.played;
 			rowTemplate.content.querySelector('td.won').textContent = team.won;
 			rowTemplate.content.querySelector('td.drawn').textContent = team.drawn;
 			rowTemplate.content.querySelector('td.lost').textContent = team.lost;
