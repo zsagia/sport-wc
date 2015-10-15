@@ -63,7 +63,8 @@ Table.prototype.cloneTeamRound = function(teamRound) {
 Table.prototype.doMatches = function(data) {
 	var teamRounds = this.makeTeamRounds(data),
 		rounds = [],
-		sortingTeams = this.sortingTeams;
+		sortingTeams = this.sortingTeams,
+		teamPositions = {};
 
 
 	Object.keys(teamRounds).forEach(function(key) {
@@ -76,6 +77,14 @@ Table.prototype.doMatches = function(data) {
 
 		round.sort(sortingTeams);
 		round.reverse();
+
+		round.forEach(function(team, index) {
+			var teamName = team.team_name,
+				lastPosition = teamPositions[teamName] || 0;
+
+			team.position = teamPositions[teamName] = index + 1;
+			team.last_position = lastPosition;
+		});
 
 		rounds.push(round);
 	});
@@ -158,6 +167,7 @@ Table.prototype.makeTeamRounds = function(matches) {
 				drawn: 0,
 				goal_against: 0,
 				goal_for: 0,
+				last_position: 0,
 				lost: 0,
 				played: 0,
 				points: 0,
@@ -177,6 +187,7 @@ Table.prototype.makeTeamRounds = function(matches) {
 				drawn: 0,
 				goal_against: 0,
 				goal_for: 0,
+				last_position: 0,
 				lost: 0,
 				played: 0,
 				points: 0,
