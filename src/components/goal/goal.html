@@ -35,9 +35,11 @@
 		var goalTemplate = importDocument.querySelector('#goalTemplate').content;
 
 		GoalPrototype.createdCallback = function() {
-			var root = this.createShadowRoot();
+			var instance = this;
 
-			var data = JSON.parse(this.getAttribute('data'));
+			var root = instance.createShadowRoot();
+
+			var data = JSON.parse(instance.getAttribute('data'));
 
 			var goal = new Goal(data);
 			
