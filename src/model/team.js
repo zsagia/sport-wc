@@ -1,7 +1,3 @@
-var importClub = document.createElement('script');
-importClub.src = 'src/model/club.js';
-document.head.appendChild(importClub);
-
 function Team(data) {
 	this.id = data.id;
 	this.setClub(data.club);
