@@ -24,22 +24,16 @@
 
 <script type="text/javascript">
 	(function VenueView() {
-		var VenuePrototype = Object.create(HTMLElement.prototype);
-
-		var importDocument = document.currentScript.ownerDocument;
-
-		var venueTemplate = importDocument.querySelector('#venueTemplate').content;
+		var VenuePrototype = Object.create(HTMLElement.prototype),
+			importDocument = document.currentScript.ownerDocument,
+			venueTemplate = importDocument.querySelector('#venueTemplate').content;
 
 		VenuePrototype.createdCallback = function() {
-			var instance = this;
-
-			var root = instance.createShadowRoot();
-
-			var data = JSON.parse(instance.getAttribute('data'));
-
-			var venue = new Venue(data);
-
-			var venueElement = venueTemplate.querySelector('.venue');
+			var instance = this,
+				root = instance.createShadowRoot(),
+				data = JSON.parse(instance.getAttribute('data')),
+				venue = new Venue(data),
+				venueElement = venueTemplate.querySelector('.venue');
 
 			venueElement.querySelector('.built').textContent = venue.built;
 			venueElement.querySelector('.capacity').textContent = venue.capacity;

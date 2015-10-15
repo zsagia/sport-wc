@@ -28,24 +28,17 @@
 
 <script type="text/javascript">
 	(function GoalView() {
-		var GoalPrototype = Object.create(HTMLElement.prototype);
-
-		var importDocument = document.currentScript.ownerDocument;
-
-		var goalTemplate = importDocument.querySelector('#goalTemplate').content;
+		var GoalPrototype = Object.create(HTMLElement.prototype),
+			importDocument = document.currentScript.ownerDocument,
+			goalTemplate = importDocument.querySelector('#goalTemplate').content;
 
 		GoalPrototype.createdCallback = function() {
-			var instance = this;
-
-			var root = instance.createShadowRoot();
-
-			var data = JSON.parse(instance.getAttribute('data'));
-
-			var goal = new Goal(data);
-			
-			var player = goal.player;
-
-			var goalElement = goalTemplate.querySelector('.goal');
+			var instance = this,
+				root = instance.createShadowRoot(),
+				data = JSON.parse(instance.getAttribute('data')),
+				goal = new Goal(data),
+				player = goal.player,
+				goalElement = goalTemplate.querySelector('.goal');
 
 			goalElement.querySelector('.player-image').src = player.image;
 			goalElement.querySelector('.title').textContent = goal.toString();

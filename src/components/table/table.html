@@ -97,9 +97,8 @@
 			headTemplate = importDocument.querySelector('#headTemplate');
 
 		TablePrototype.createdCallback = function() {
-			var instance = this;
-
-			var root = instance.createShadowRoot(),
+			var instance = this,
+				root = instance.createShadowRoot(),
 				showRound = instance.getAttribute('showRound'),
 				data = window.matches,
 				teamsData = window.teams;
