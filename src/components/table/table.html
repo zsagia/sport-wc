@@ -60,6 +60,7 @@
 <template id="rowTemplate">
 	<tr>
 		<td class="position"></td>
+		<td class="last-position"></td>
 		<td class="club"></td>
 		<td class="played"></td>
 		<td class="won"></td>
@@ -74,6 +75,7 @@
 <template id="headTemplate">
 	<tr>
 		<th class="col-position"></th>
+		<th class="col-last-position"></th>
 		<th class="col-club"></th>
 		<th class="col-played"></th>
 		<th class="col-won"></th>
@@ -183,6 +185,7 @@
 		*/
 		var setTHHead = function(headTemplate) {
 			headTemplate.content.querySelector('th.col-position').textContent = 'POS';
+			headTemplate.content.querySelector('th.col-last-position').textContent = 'LP';
 			headTemplate.content.querySelector('th.col-club').textContent = 'CLUB';
 			headTemplate.content.querySelector('th.col-played').textContent = 'P';
 			headTemplate.content.querySelector('th.col-won').textContent = 'W';
@@ -226,6 +229,7 @@
 			}
 
 			rowTemplate.content.querySelector('td.position').textContent = position;
+			rowTemplate.content.querySelector('td.last-position').textContent = '(' + (team.last_position || "-") + ')';
 			rowTemplate.content.querySelector('td.club').textContent = team.team_name;
 			rowTemplate.content.querySelector('td.played').textContent = team.played;
 			rowTemplate.content.querySelector('td.won').textContent = team.won;
