@@ -32,6 +32,27 @@
 		.swc-table tr.eighteenth, .swc-table tr.nineteenth, .swc-table tr.twentieth {
 			background-color: #e0e6e9;
 		}
+		.swc-table td.movement span {
+			background-image: url('http://www.premierleague.com/etc/designs/premierleague/images/iconsprite.png');
+			display: inline-block;
+			height: 22px;
+			width: 20px;
+		}
+		.swc-table td.movement span.down {
+			background-position: -619px -155px;
+		}
+		.swc-table td.movement span.stayed {
+			background-position: -619px -243px;
+		}
+		.swc-table td.movement span.up {
+			background-position: -619px -184px;
+		}
+		.swc-table th.col-movement span.head {
+			background: url('http://www.premierleague.com/etc/designs/premierleague/images/iconsprite.png') -613px -58px no-repeat;
+			display: inline-block;
+			height: 22px;
+			width: 25px;
+		}
 		.swc-table thead tr, .swc-table tfoot th {
 			background-color: #8b95a4
 		}
@@ -60,6 +81,7 @@
 <template id="rowTemplate">
 	<tr>
 		<td class="position"></td>
+		<td class="movement"><span></span></td>
 		<td class="last-position"></td>
 		<td class="club"></td>
 		<td class="played"></td>
@@ -75,6 +97,7 @@
 <template id="headTemplate">
 	<tr>
 		<th class="col-position"></th>
+		<th class="col-movement"><span class="head"></span></th>
 		<th class="col-last-position"></th>
 		<th class="col-club"></th>
 		<th class="col-played"></th>
@@ -157,6 +180,23 @@
 		);
 
 		/*
+			calculateMovementClassName function
+		*/
+		var calculateMovementClassName = function(team) {
+			var movementClassName = 'stayed',
+				difference = team.last_position != 0 ? team.position - team.last_position : 0;
+
+			if (difference < 0) {
+				movementClassName = 'up';
+			}
+			else if (difference > 0) {
+				movementClassName = 'down';
+			}
+
+			return movementClassName;
+		};
+
+		/*
 			createRoundRange function
 		*/
 		var createRoundRange = function (rounds, showRound, roundElement) {
@@ -228,6 +268,7 @@
 			}
 
 			rowTemplate.content.querySelector('td.position').textContent = position;
+			rowTemplate.content.querySelector('td.movement span').className = calculateMovementClassName(team);
 			rowTemplate.content.querySelector('td.last-position').textContent = '(' + (team.last_position || "-") + ')';
 			rowTemplate.content.querySelector('td.club').textContent = team.team_name;
 			rowTemplate.content.querySelector('td.played').textContent = team.played;
