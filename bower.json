@@ -1,18 +1,22 @@
 {
-	"name": "sport-wc",
-	"version": "0.0.5",
-	"homepage": "https://github.com/zsagia/sport-wc",
-	"authors": [
-		"Zsolt Szabo <zsolt.szabo@liferay.com>"
-	],
-	"description": "Sport Web Components",
-	"main": "sport-wc.js",
-	"keywords": [
-		"sport"
-	],
-	"license": "MIT",
-	"devDependencies": {
-		"gulp": "~3.9.0",
-		"jasmine": "~2.3.0"
-	}
+  "name": "sport-wc",
+  "version": "0.0.5",
+  "homepage": "https://github.com/zsagia/sport-wc",
+  "authors": [
+    "Zsolt Szabo <zsolt.szabo@liferay.com>"
+  ],
+  "description": "Sport Web Components",
+  "main": "sport-wc.js",
+  "keywords": [
+    "sport"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "~3.9.0",
+    "jasmine": "~2.3.0"
+  },
+  "dependencies": {
+    "requirejs": "~2.1.20",
+    "iron-ajax": "PolymerElements/iron-ajax#~1.1.1"
+  }
 }
