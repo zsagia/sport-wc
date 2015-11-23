@@ -3,366 +3,253 @@
 <script src="../../model/team.js"></script>
 <script src="../../model/club.js"></script>
 
-<template id="tableTemplate">
-	<style>
-		.swc-table table{
-			width: 100%;
-		}
-		.swc-table td, .swc-table th {
-			border: 1px solid #ddd;
-			color: #333;
-			font-family: Arial,Helvetica,sans-serif;
-			font-size: 12px;
-			font-weight: bold;
-			padding: 5px;
-			text-align: center;
-		}
-		.swc-table td.club {
-			text-align: left;
-		}
-		.swc-table tr.first {
-			background-color: #8cbde0;
-		}
-		.swc-table tr.second, .swc-table tr.third, .swc-table tr.fourth {
-			background-color: #c8dceb;
-		}
-		.swc-table tr.fifth {
-			background-color: #edf5fa;
-		}
-		.swc-table tr.eighteenth, .swc-table tr.nineteenth, .swc-table tr.twentieth {
-			background-color: #e0e6e9;
-		}
-		.swc-table td.movement span {
-			background-image: url('http://www.premierleague.com/etc/designs/premierleague/images/iconsprite.png');
-			display: inline-block;
-			height: 22px;
-			width: 20px;
-		}
-		.swc-table td.movement span.down {
-			background-position: -619px -155px;
-		}
-		.swc-table td.movement span.stayed {
-			background-position: -619px -243px;
-		}
-		.swc-table td.movement span.up {
-			background-position: -619px -184px;
-		}
-		.swc-table th.col-movement span.head {
-			background: url('http://www.premierleague.com/etc/designs/premierleague/images/iconsprite.png') -613px -58px no-repeat;
-			display: inline-block;
-			height: 22px;
-			width: 25px;
-		}
-		.swc-table thead tr, .swc-table tfoot th {
-			background-color: #8b95a4
-		}
-		.swc-table input[type=range] {
-			width: 100%;
-		}
-		.swc-table header {
-			padding: 15px;
-		}
-		input[type=range] {
-		  -webkit-appearance: none;
-		  width: 100%;
-		  margin: 13.8px 0;
-		}
-		input[type=range]:focus {
-		  outline: none;
-		}
-		input[type=range]::-webkit-slider-runnable-track {
-		  width: 100%;
-		  height: 8.4px;
-		  cursor: pointer;
-		  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		  background: #0971a9;
-		  border-radius: 1.3px;
-		  border: 0.2px solid #010101;
-		}
-		input[type=range]::-webkit-slider-thumb {
-		  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		  border: 1px solid #000000;
-		  height: 36px;
-		  width: 16px;
-		  border-radius: 3px;
-		  background: #ffffff;
-		  cursor: pointer;
-		  -webkit-appearance: none;
-		  margin-top: -14px;
-		}
-		input[type=range]:focus::-webkit-slider-runnable-track {
-		  background: #0a81c1;
-		}
-		input[type=range]::-moz-range-track {
-		  width: 100%;
-		  height: 8.4px;
-		  cursor: pointer;
-		  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		  background: #0971a9;
-		  border-radius: 1.3px;
-		  border: 0.2px solid #010101;
-		}
-		input[type=range]::-moz-range-thumb {
-		  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		  border: 1px solid #000000;
-		  height: 36px;
-		  width: 16px;
-		  border-radius: 3px;
-		  background: #ffffff;
-		  cursor: pointer;
-		}
-		input[type=range]::-ms-track {
-		  width: 100%;
-		  height: 8.4px;
-		  cursor: pointer;
-		  background: transparent;
-		  border-color: transparent;
-		  color: transparent;
-		}
-		input[type=range]::-ms-fill-lower {
-		  background: #086191;
-		  border: 0.2px solid #010101;
-		  border-radius: 2.6px;
-		  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		}
-		input[type=range]::-ms-fill-upper {
-		  background: #0971a9;
-		  border: 0.2px solid #010101;
-		  border-radius: 2.6px;
-		  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		}
-		input[type=range]::-ms-thumb {
-		  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-		  border: 1px solid #000000;
-		  height: 36px;
-		  width: 16px;
-		  border-radius: 3px;
-		  background: #ffffff;
-		  cursor: pointer;
-		  height: 8.4px;
-		}
-		input[type=range]:focus::-ms-fill-lower {
-		  background: #0971a9;
-		}
-		input[type=range]:focus::-ms-fill-upper {
-		  background: #0a81c1;
-		}
-	</style>
+<script src="../../../lib/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../../../lib/iron-ajax/iron-ajax.html">
 
-	<section class="swc-component swc-table">
-		<header>
-			<input id="round" type="range"/>
-		</header>
+<dom-module id="swc-table">
+	<template>
+		<link rel="stylesheet" href="assets/default.css">
+		<iron-ajax id="tableRequest" auto handle-as="json" on-response="loadData"></iron-ajax>
 
-		<table class="table">
-			<caption></caption>
-			<thead></thead>
-			<tfoot></tfoot>
-			<tbody></tbody>
-		</table>
-	</section>
-</template>
+		<section class="swc-component swc-table">
+			<header>
+				<input id="round" type="range"/>
+			</header>
 
-<template id="rowTemplate">
-	<tr>
-		<td class="position"></td>
-		<td class="movement"><span></span></td>
-		<td class="last-position"></td>
-		<td class="club"></td>
-		<td class="played"></td>
-		<td class="won"></td>
-		<td class="drawn"></td>
-		<td class="lost"></td>
-		<td class="goal-for"></td>
-		<td class="goal-against"></td>
-		<td class="point"></td>
-	</tr>
-</template>
+			<table class="table">
+				<caption></caption>
+				<thead>
+					<template is="dom-if" if="{{headerClass}}">
+						<tr>
+							<th class="col-position">[[headerClass.position]]</th>
+							<th class="col-movement"><span class="head"></span></th>
+							<th class="col-last-position">[[headerClass.lastPosition]]</th>
+							<th class="col-club">[[headerClass.club]]</th>
+							<th class="col-played">[[headerClass.played]]</th>
+							<th class="col-won">[[headerClass.won]]</th>
+							<th class="col-drawn">[[headerClass.drawn]]</th>
+							<th class="col-lost">[[headerClass.lost]]</th>
+							<th class="col-goal-for">[[headerClass.goalFor]]</th>
+							<th class="col-goal-against">[[headerClass.goalAgainst]]</th>
+							<th class="col-point">[[headerClass.points]]</th>
+						</tr>
+					</template>
+				</thead>
+				<tfoot>
+					<template is="dom-if" if="{{headerClass}}">
+						<tr>
+							<th class="col-position">[[headerClass.position]]</th>
+							<th class="col-movement"><span class="head"></span></th>
+							<th class="col-last-position">[[headerClass.lastPosition]]</th>
+							<th class="col-club">[[headerClass.club]]</th>
+							<th class="col-played">[[headerClass.played]]</th>
+							<th class="col-won">[[headerClass.won]]</th>
+							<th class="col-drawn">[[headerClass.drawn]]</th>
+							<th class="col-lost">[[headerClass.lost]]</th>
+							<th class="col-goal-for">[[headerClass.goalFor]]</th>
+							<th class="col-goal-against">[[headerClass.goalAgainst]]</th>
+							<th class="col-point">[[headerClass.points]]</th>
+						</tr>
+					</template>
+				</tfoot>
+				<tbody>
+					<template id="rowTemplate" is="dom-repeat" items="[[selectedRound]]">
+						<tr class$="[[calculateRowClass(item)]]">
+							<td class="position">[[item.position]]</td>
+							<td class="movement"><span class$="[[calculateMovementClassName(item)]]"></span></td>
+							<td class="last-position">[[calculateLastPosition(item)]]</td>
+							<td class="club">[[item.team_name]]</td>
+							<td class="played">[[item.played]]</td>
+							<td class="won">[[item.won]]</td>
+							<td class="drawn">[[item.drawn]]</td>
+							<td class="lost">[[item.lost]]</td>
+							<td class="goal-for">[[item.goal_for]]</td>
+							<td class="goal-against">[[item.goal_against]]</td>
+							<td class="point">[[item.points]]</td>
+						</tr>
+					</template>
+				</tbody>
+			</table>
+		</section>
+	</template>
 
-<template id="headTemplate">
-	<tr>
-		<th class="col-position"></th>
-		<th class="col-movement"><span class="head"></span></th>
-		<th class="col-last-position"></th>
-		<th class="col-club"></th>
-		<th class="col-played"></th>
-		<th class="col-won"></th>
-		<th class="col-drawn"></th>
-		<th class="col-lost"></th>
-		<th class="col-goal-for"></th>
-		<th class="col-goal-against"></th>
-		<th class="col-point"></th>
-	</tr>
-</template>
+	
+</dom-module>
 
+<script>
+		Polymer(
+			{
+				is: "swc-table",
 
-<script type="text/javascript">
-	(function TableView() {
-		var TablePrototype = Object.create(HTMLElement.prototype),
-			importDocument = document.currentScript.ownerDocument,
-			tableTemplate = importDocument.querySelector('#tableTemplate'),
-			rowTemplate = importDocument.querySelector('#rowTemplate'),
-			headTemplate = importDocument.querySelector('#headTemplate');
+				properties: {
 
-		TablePrototype.createdCallback = function() {
-			var instance = this,
-				root = instance.createShadowRoot(),
-				showRound = instance.getAttribute('showRound'),
-				data = window.matches,
-				teamsData = window.teams;
+					headerClass: {
+						type: Object,
+						notify: true,
+          				readOnly: true,
+						value: {
+							position: "POS",
+							lastPosition: "LP",
+							club: "CLUB",
+							played: "P",
+							won: "W",
+							drawn: "D",
+							lost: "L",
+							goalFor: "GF",
+							goalAgainst: "GA",
+							points: "P"
+						}
+					},
 
-			teamsData.forEach(
-				function(team) {
-					localStorage.setItem(team.id, JSON.stringify(team));
+					matches: {
+						type: Array,
+						value: []
+					},
+
+					rounds: {
+						type: Array,
+						value: []
+					},
+
+					selectedRound: {
+						type: Array,
+						value: []
+					},
+
+					tableElement: {
+						type: Object,
+						value: null
+					},
+
+					type: {
+						type: String,
+						value: "matches"
+					},
+
+					url: {
+						type: String,
+						value: null
+					}
+				},
+
+				ready: function() {
+					this.$.tableRequest.url = this.url;
+
+					this.notifyPath('headerClass', this.headerClass);
+				},
+
+				loadData: function(data) {
+					var json = data.detail.response;
+
+					if (json.type === "matches") {
+						this.loadMatches(json);
+					}
+					else {
+						this.loadSummarized(json);
+					}
+				},
+
+				loadMatches: function(json) {
+					var matches = json.matches;
+					var teams = json.teams;
+
+					teams.forEach(
+						function(team) {
+							localStorage.setItem(team.id, JSON.stringify(team));
+						}
+					);
+
+					var tableElement = new Table(matches);
+
+					this.selectedRound = tableElement.rounds[0];
+				},
+
+				loadSummarized: function(json) {
+					var tableElement = new Table(json);
+
+					this.selectedRound = tableElement.rounds[0];
+				},
+
+				/*
+					calculateMovementClassName function
+				*/
+				calculateMovementClassName: function(team) {
+					var movementClassName = 'stayed',
+						difference = team.last_position != 0 ? team.position - team.last_position : 0;
+
+					if (difference < 0) {
+						movementClassName = 'up';
+					}
+					else if (difference > 0) {
+						movementClassName = 'down';
+					}
+
+					return movementClassName;
+				},
+
+				/*
+					calculateLastPosition function
+				*/
+				calculateLastPosition: function(team) {
+					return '(' + (team.last_position || "-") + ')';
+				},
+
+				/*
+					createRoundRange function
+				*/
+				createRoundRange: function (rounds, showRound, roundElement) {
+					roundElement.setAttribute('min', 1);
+					roundElement.setAttribute('max', rounds.length);
+					roundElement.setAttribute('steps', 1);
+					roundElement.setAttribute('value', showRound);
+				},
+
+				/*
+					createTableBodyElement function
+				*/
+				createTableBodyElement: function(round, rowTemplate, tableBodyElement) {
+					for (var i = 0; i < round.length; i++) {
+						var team = round[i];
+						
+						setTDData(rowTemplate, team, i + 1);
+
+						tableBodyElement.appendChild(document.importNode(rowTemplate.content, true));
+					}
+				},
+
+				/*
+					calculateRowClass function
+				*/
+				calculateRowClass: function(team) {
+					var className = '';
+
+					if (team.position === 1) {
+						className = 'first';
+					}
+					else if (team.position === 2) {
+						className = 'second';
+					}
+					else if (team.position === 3) {
+						className = 'third';
+					}
+					else if (team.position === 4) {
+						className = 'fourth';
+					}
+					else if (team.position === 5) {
+						className = 'fifth';
+					}
+					else if (team.position === 18) {
+						className = 'eighteenth';
+					}
+					else if (team.position === 19) {
+						className = 'nineteenth';
+					}
+					else if (team.position === 20) {
+						className = 'twentieth';
+					}
+
+					return className;
 				}
-			);
-
-			//var data = window.table;
-
-			var table = new Table(data),
-				tableElement = tableTemplate.content.querySelector('.swc-table table');
-
-			tableElement.querySelector('caption').textContent = table.getTableTitle();
-
-			var tableBodyElement = tableTemplate.content.querySelector('.swc-table table tbody'),
-				headElement = tableTemplate.content.querySelector('thead'),
-				footElement = tableTemplate.content.querySelector('tfoot'),
-				roundElement = tableTemplate.content.querySelector('#round');
-
-			setTHHead(headTemplate);
-
-			headElement.appendChild(document.importNode(headTemplate.content, true));
-			footElement.appendChild(document.importNode(headTemplate.content, true));
-
-			var rounds = table.rounds,
-				round = rounds[showRound - 1] || rounds[rounds.length - 1];
-
-			createRoundRange(rounds, showRound, roundElement);
-
-			createTableBodyElement(round, rowTemplate, tableBodyElement);
-
-			root.appendChild(document.importNode(tableTemplate.content, true));
-
-			var rangeElement = root.querySelector('#round');
-
-			rangeElement.addEventListener('change', function(event) {
-				var round = rounds[event.currentTarget.value - 1];
-
-				tableBodyElement.innerHTML = '';
-
-				createTableBodyElement(round, rowTemplate, tableBodyElement);
-
-				var tBodyRoot = root.querySelector('tbody');
-
-				tBodyRoot.innerHTML = tableBodyElement.innerHTML;
-			}, false);
-		}
-
-		document.registerElement(
-			'swc-table', {
-				prototype: TablePrototype
 			}
 		);
-
-		/*
-			calculateMovementClassName function
-		*/
-		var calculateMovementClassName = function(team) {
-			var movementClassName = 'stayed',
-				difference = team.last_position != 0 ? team.position - team.last_position : 0;
-
-			if (difference < 0) {
-				movementClassName = 'up';
-			}
-			else if (difference > 0) {
-				movementClassName = 'down';
-			}
-
-			return movementClassName;
-		};
-
-		/*
-			createRoundRange function
-		*/
-		var createRoundRange = function (rounds, showRound, roundElement) {
-			roundElement.setAttribute('min', 1);
-			roundElement.setAttribute('max', rounds.length);
-			roundElement.setAttribute('steps', 1);
-			roundElement.setAttribute('value', showRound);
-		};
-
-		/*
-			createTableBodyElement function
-		*/
-		var createTableBodyElement = function(round, rowTemplate, tableBodyElement) {
-			for (var i = 0; i < round.length; i++) {
-				var team = round[i];
-				
-				setTDData(rowTemplate, team, i + 1);
-
-				tableBodyElement.appendChild(document.importNode(rowTemplate.content, true));
-			}
-		};
-
-		/*
-			setTHHead function
-		*/
-		var setTHHead = function(headTemplate) {
-			headTemplate.content.querySelector('th.col-position').textContent = 'POS';
-			headTemplate.content.querySelector('th.col-last-position').textContent = 'LP';
-			headTemplate.content.querySelector('th.col-club').textContent = 'CLUB';
-			headTemplate.content.querySelector('th.col-played').textContent = 'P';
-			headTemplate.content.querySelector('th.col-won').textContent = 'W';
-			headTemplate.content.querySelector('th.col-drawn').textContent = 'D';
-			headTemplate.content.querySelector('th.col-lost').textContent = 'L';
-			headTemplate.content.querySelector('th.col-goal-for').textContent = 'GF';
-			headTemplate.content.querySelector('th.col-goal-against').textContent = 'GA';
-			headTemplate.content.querySelector('th.col-point').textContent = 'PTS';
-		};
-
-		/*
-			setTDData function
-		*/
-		var setTDData = function(rowTemplate, team, position) {
-			if (position === 1) {
-				rowTemplate.content.querySelector('tr').className = 'first';
-			}
-			else if (position === 2) {
-				rowTemplate.content.querySelector('tr').className = 'second';
-			}
-			else if (position === 3) {
-				rowTemplate.content.querySelector('tr').className = 'third';
-			}
-			else if (position === 4) {
-				rowTemplate.content.querySelector('tr').className = 'fourth';
-			}
-			else if (position === 5) {
-				rowTemplate.content.querySelector('tr').className = 'fifth';
-			}
-			else if (position === 18) {
-				rowTemplate.content.querySelector('tr').className = 'eighteenth';
-			}
-			else if (position === 19) {
-				rowTemplate.content.querySelector('tr').className = 'nineteenth';
-			}
-			else if (position === 20) {
-				rowTemplate.content.querySelector('tr').className = 'twentieth';
-			}
-			else {
-				rowTemplate.content.querySelector('tr').className = '';
-			}
-
-			rowTemplate.content.querySelector('td.position').textContent = position;
-			rowTemplate.content.querySelector('td.movement span').className = calculateMovementClassName(team);
-			rowTemplate.content.querySelector('td.last-position').textContent = '(' + (team.last_position || "-") + ')';
-			rowTemplate.content.querySelector('td.club').textContent = team.team_name;
-			rowTemplate.content.querySelector('td.played').textContent = team.played;
-			rowTemplate.content.querySelector('td.won').textContent = team.won;
-			rowTemplate.content.querySelector('td.drawn').textContent = team.drawn;
-			rowTemplate.content.querySelector('td.lost').textContent = team.lost;
-			rowTemplate.content.querySelector('td.goal-for').textContent = team.goal_for;
-			rowTemplate.content.querySelector('td.goal-against').textContent = team.goal_against;
-			rowTemplate.content.querySelector('td.point').textContent = team.points;
-		};
-	})();
-</script>
+	</script>

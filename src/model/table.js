@@ -3,16 +3,16 @@
 */
 function Table(data) {
 
-	if (this.dataIsMatches(data)) {
+	if (data.type === "matches") {
 		this.setCompetition('2015/16');
 		this.setMatches(data);
 
 		this.rounds = this.doMatches(this.matches);
 	}
-	else if (this.dataIsSummarized(data)) {
+	else if (data.type === "summarized") {
 		this.setCompetition(data.type + ' ' + data.season);
 
-		this.rounds = this.doSummerized(data);
+		this.rounds = this.doSummerized(data.summarized);
 	}
 }
 
@@ -129,20 +129,6 @@ Table.prototype.getTableTitle = function() {
 	}
 
 	return tableTitle;
-};
-
-/*
-	function dataIsMatches
-*/
-Table.prototype.dataIsMatches = function(data) {
-	return (typeof (data.length) == 'undefined') ? false : true;
-};
-
-/*
-	function dataIsSummarized
-*/
-Table.prototype.dataIsSummarized = function(data) {
-	return ((typeof data === 'object') && ((data instanceof Array) !== true)) ? true : false; 
 };
 
 /*
