@@ -3,13 +3,13 @@
 */
 function Table(data) {
 
-	if (data.type === "matches") {
+	if (data.matches) {
 		this.setCompetition('2015/16');
-		this.setMatches(data);
+		this.setMatches(data.matches);
 
 		this.rounds = this.doMatches(this.matches);
 	}
-	else if (data.type === "summarized") {
+	else if (data.summarized) {
 		this.setCompetition(data.type + ' ' + data.season);
 
 		this.rounds = this.doSummerized(data.summarized);
