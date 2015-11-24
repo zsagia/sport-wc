@@ -74,8 +74,6 @@
 			</table>
 		</section>
 	</template>
-
-	
 </dom-module>
 
 <script>
@@ -134,42 +132,8 @@
 					}
 				},
 
-				ready: function() {
-					this.$.tableRequest.url = this.url;
-
-					this.notifyPath('headerClass', this.headerClass);
-				},
-
-				loadData: function(data) {
-					var json = data.detail.response;
-
-					if (json.type === "matches") {
-						this.loadMatches(json);
-					}
-					else {
-						this.loadSummarized(json);
-					}
-				},
-
-				loadMatches: function(json) {
-					var matches = json.matches;
-					var teams = json.teams;
-
-					teams.forEach(
-						function(team) {
-							localStorage.setItem(team.id, JSON.stringify(team));
-						}
-					);
-
-					var tableElement = new Table(matches);
-
-					this.selectedRound = tableElement.rounds[0];
-				},
-
-				loadSummarized: function(json) {
-					var tableElement = new Table(json);
-
-					this.selectedRound = tableElement.rounds[0];
+				isRanged: function(rounds) {
+					return rounds && rounds.length > 1
 				},
 
 				/*
@@ -194,29 +158,6 @@
 				*/
 				calculateLastPosition: function(team) {
 					return '(' + (team.last_position || "-") + ')';
-				},
-
-				/*
-					createRoundRange function
-				*/
-				createRoundRange: function (rounds, showRound, roundElement) {
-					roundElement.setAttribute('min', 1);
-					roundElement.setAttribute('max', rounds.length);
-					roundElement.setAttribute('steps', 1);
-					roundElement.setAttribute('value', showRound);
-				},
-
-				/*
-					createTableBodyElement function
-				*/
-				createTableBodyElement: function(round, rowTemplate, tableBodyElement) {
-					for (var i = 0; i < round.length; i++) {
-						var team = round[i];
-						
-						setTDData(rowTemplate, team, i + 1);
-
-						tableBodyElement.appendChild(document.importNode(rowTemplate.content, true));
-					}
 				},
 
 				/*
@@ -251,6 +192,60 @@
 					}
 
 					return className;
+				},
+
+				/*
+					createRoundRange function
+				*/
+				createRoundRange: function (rounds, showRound, roundElement) {
+					roundElement.setAttribute('min', 1);
+					roundElement.setAttribute('max', rounds.length);
+					roundElement.setAttribute('steps', 1);
+					roundElement.setAttribute('value', showRound);
+				},
+
+				loadData: function(data) {
+					var json = data.detail.response;
+
+					if (json.matches) {
+						this.loadMatches(json);
+					}
+					else {
+						this.loadSummarized(json);
+					}
+				},
+
+				loadMatches: function(json) {
+					var matches = json.matches;
+					var teams = json.teams;
+
+					teams.forEach(
+						function(team) {
+							localStorage.setItem(team.id, JSON.stringify(team));
+						}
+					);
+
+					var tableElement = new Table(
+						{
+							matches: matches
+						}
+					);
+
+					this.rounds = tableElement.rounds;
+					this.selectedRound = tableElement.rounds[0];
+				},
+
+				loadSummarized: function(json) {
+					var tableElement = new Table(json);
+
+					this.selectedRound = tableElement.rounds[0];
+				},
+
+				ready: function() {
+					this.$.tableRequest.url = this.url;
+
+					this.notifyPath('headerClass', this.headerClass);
+					this.notifyPath('rounds', this.rounds);
 				}
 			}
 		);
