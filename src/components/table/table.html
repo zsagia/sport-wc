@@ -13,7 +13,9 @@
 
 		<section class="swc-component swc-table">
 			<header>
-				<input id="round" type="range"/>
+				<template is="dom-if" if="{{isRanged(rounds)}}">
+					<input id="round" type="range"/>
+				</template>
 			</header>
 
 			<table class="table">
